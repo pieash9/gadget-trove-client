@@ -1,4 +1,4 @@
-import React from "react";
+import logo from "../../../assets/logo.png";
 
 const Footer = () => {
   return (
@@ -7,12 +7,8 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row md:justify-between">
           {/* Logo */}
           <div className="flex items-center mb-4 md:mb-0">
-            <img
-              className="h-8 w-8 mr-2"
-              src="/path/to/your/logo.png"
-              alt="Logo"
-            />
-            <span className="text-white text-lg font-semibold">Your Logo</span>
+            <img className="h-8 w-8 mr-2" src={logo} alt="Logo" />
+            <span className="text-white text-lg font-semibold">GadgetTrove</span>
           </div>
 
           {/* Address */}
