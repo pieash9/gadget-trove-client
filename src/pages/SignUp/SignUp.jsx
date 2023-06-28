@@ -1,13 +1,63 @@
+import { useState } from "react";
 import signUpImg from "../../assets/signup.jpg";
 import { useForm } from "react-hook-form";
+import { FaEyeSlash, FaEye } from "react-icons/fa";
+import useAuth from "../../hooks/useAuth";
+import { toast } from "react-hot-toast";
 
 const SignUp = () => {
+  const { createUser, updateUser, logout } = useAuth();
+  const [passwordMatchError, setPasswordMatchError] = useState("");
+  const [show, setShow] = useState(false);
+  const [cShow, setCShow] = useState(false);
+  const image_hosting_token = import.meta.env.VITE_IBB_KEY;
+  const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_token}`;
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
-  const onSubmit = (data) => console.log(data);
+  } = useForm(); //form submit using react-hook
+
+  const onSubmit = (data) => {
+    //matching password
+    if (data.password !== data.cPassword) {
+      return setPasswordMatchError("Password & Confirm Password did not match");
+    }
+    setPasswordMatchError("");
+    console.log(data);
+
+    const formData = new FormData(); //creating formData for upload image
+    formData.append("image", data.image[0]); //getting image data
+    fetch(image_hosting_url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgRes) => {
+        if (imgRes.success) {
+          const imgUrl = imgRes.data.display_url;
+
+          const userData = {
+            name: data.name,
+            email: data.email,
+            image: imgUrl,
+            createdAt: new Date(),
+          };
+          //create user using email,password
+          createUser(data.email, data.password)
+            .then((result) => {
+              updateUser(data.name, imgUrl).then(() => {
+                logout()
+                  .then(() => {})
+                  .catch(() => toast.error("Something went wrong"));
+                toast.success("Sign Completed. Login Now!");
+                console.log(result.user);
+              });
+            })
+            .catch((err) => toast.error(err));
+        }
+      });
+  };
 
   const inputClassName = `block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer`;
 
@@ -19,8 +69,8 @@ const SignUp = () => {
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className=" border p-4 rounded">
         <h2 className="text-gray-800 font-semibold text-4xl mb-5">Sign Up</h2>
-        {/* Name */}
-        <div className="bg-base-200 rounded p-5">
+        <div className="bg-base-100 rounded p-5">
+          {/* Name */}
           <div className="relative z-0 w-full mb-6 group">
             <input
               {...register("name", { required: true })}
@@ -31,10 +81,12 @@ const SignUp = () => {
             />
 
             <label htmlFor="name" className={labelClassName}>
-             Full Name
+              Full Name
             </label>
             {errors.name && (
-              <span className="text-red-500 text-sm">Full Name is required</span>
+              <span className="text-red-500 text-sm">
+                Full Name is required
+              </span>
             )}
           </div>
 
@@ -58,18 +110,53 @@ const SignUp = () => {
           {/* Password */}
           <div className="relative z-0 w-full mb-6 group">
             <input
-              {...register("password", { required: true })}
-              type="password"
+              {...register("password", {
+                required: true,
+                minLength: 6,
+                pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/,
+              })}
+              type={show ? "text" : "password"}
               id="password"
               className={inputClassName}
               placeholder=" "
               required
             />
+            {show ? (
+              <FaEye
+                onClick={() => setShow(!show)}
+                className="absolute top-3 right-5 cursor-pointer text-gray-400"
+                size={18}
+              />
+            ) : (
+              <FaEyeSlash
+                onClick={() => setShow(!show)}
+                className="absolute top-3 right-5 cursor-pointer text-gray-400"
+                size={18}
+              />
+            )}
             <label htmlFor="password" className={labelClassName}>
               Password
             </label>
-            {errors.password && (
-              <span className="text-red-500 text-sm">Password is required</span>
+            <small className="text-gray-800">
+              Password should be at least 6 characters long, include minimum one
+              special character, capital letter & number.
+            </small>
+            {errors.password?.type === "required" && (
+              <span className="text-red-500 text-sm block">
+                Password is required
+              </span>
+            )}
+            {errors.password?.type === "minLength" && (
+              <p className="text-red-600">
+                Password must be more than 6 characters
+              </p>
+            )}
+
+            {errors.password?.type === "pattern" && (
+              <p className="text-red-600">
+                Password must have one Uppercase, one number and one special
+                character.
+              </p>
             )}
           </div>
 
@@ -77,11 +164,24 @@ const SignUp = () => {
           <div className="relative z-0 w-full mb-6 group">
             <input
               {...register("cPassword", { required: true })}
-              type="password"
+              type={cShow ? "text" : "password"}
               id="cPassword"
               className={inputClassName}
               placeholder=" "
             />
+            {cShow ? (
+              <FaEye
+                onClick={() => setCShow(!cShow)}
+                className="absolute top-3 right-5 cursor-pointer text-gray-400"
+                size={18}
+              />
+            ) : (
+              <FaEyeSlash
+                onClick={() => setCShow(!cShow)}
+                className="absolute top-3 right-5 cursor-pointer text-gray-400"
+                size={18}
+              />
+            )}
             <label htmlFor="cPassword" className={labelClassName}>
               Confirm Password
             </label>
@@ -90,16 +190,22 @@ const SignUp = () => {
                 Confirm password is required
               </span>
             )}
+            {passwordMatchError && (
+              <span className="text-red-500 text-sm">
+                Password did not Match
+              </span>
+            )}
           </div>
 
-          {/* Confirm Password */}
+          {/* Image*/}
           <div className="relative z-0 w-full mb-6 group">
             <input
-            {...register("image", { required: true })}
+              {...register("image", { required: true })}
               type="file"
               id="image"
               className={inputClassName}
               placeholder=" "
+              accept="image/*"
               //TODO to make image required
             />
             <label htmlFor="image" className={labelClassName}>

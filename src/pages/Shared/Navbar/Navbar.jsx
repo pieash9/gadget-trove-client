@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
 
 const Navbar = () => {
+  const { user, logout } = useAuth();
   const navLinkClassName = ({ isActive }) =>
     isActive
       ? "text-white font-semibold  bg-gray-700"
@@ -23,13 +25,24 @@ const Navbar = () => {
       >
         Shop
       </NavLink>
-      <NavLink
-        className={navLinkClassName}
-        style={{ backgroundColor: "transparent" }}
-        to="/signUp"
-      >
-        SignUp
-      </NavLink>
+
+      {user ? (
+        <NavLink
+          className={navLinkClassName}
+          style={{ backgroundColor: "transparent" }}
+          onClick={logout}
+        >
+          Logout
+        </NavLink>
+      ) : (
+        <NavLink
+          className={navLinkClassName}
+          style={{ backgroundColor: "transparent" }}
+          to="/signUp"
+        >
+          SignUp
+        </NavLink>
+      )}
     </>
   );
 
