@@ -38,9 +38,9 @@ const Navbar = () => {
         <NavLink
           className={navLinkClassName}
           style={{ backgroundColor: "transparent" }}
-          to="/signUp"
+          to="/login"
         >
-          SignUp
+          Login
         </NavLink>
       )}
     </>

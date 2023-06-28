@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const { createUser, updateUser, logout } = useAuth();
@@ -12,6 +13,9 @@ const SignUp = () => {
   const [cShow, setCShow] = useState(false);
   const image_hosting_token = import.meta.env.VITE_IBB_KEY;
   const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_token}`;
+
+  const navigate = useNavigate();
+
   const {
     register,
     formState: { errors },
@@ -43,15 +47,17 @@ const SignUp = () => {
             image: imgUrl,
             createdAt: new Date(),
           };
+          //todo add data to server
           //create user using email,password
           createUser(data.email, data.password)
-            .then((result) => {
+            .then(() => {
               updateUser(data.name, imgUrl).then(() => {
                 logout()
-                  .then(() => {})
+                  .then(() => {
+                    navigate("/login");
+                    toast.success("Sign Completed. Login Now!");
+                  })
                   .catch(() => toast.error("Something went wrong"));
-                toast.success("Sign Completed. Login Now!");
-                console.log(result.user);
               });
             })
             .catch((err) => toast.error(err));
@@ -63,7 +69,7 @@ const SignUp = () => {
 
   const labelClassName = `peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6`;
   return (
-    <div className=" my-10 md:grid grid-cols-1 md:grid-cols-2 gap-5">
+    <div className=" my-20 md:grid grid-cols-1 md:grid-cols-2 gap-5">
       <div>
         <img src={signUpImg} alt="" />
       </div>
@@ -119,7 +125,6 @@ const SignUp = () => {
               id="password"
               className={inputClassName}
               placeholder=" "
-              required
             />
             {show ? (
               <FaEye
@@ -237,6 +242,15 @@ const SignUp = () => {
               Sign Up now
             </button>
           </div>
+          <p className="mt-3 text-sm">
+            Already have an account?{" "}
+            <Link
+              to="/login"
+              className="text-blue-500 link-hover cursor-pointer"
+            >
+              Login
+            </Link>
+          </p>
         </div>
       </form>
     </div>

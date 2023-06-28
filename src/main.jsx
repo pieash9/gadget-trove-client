@@ -8,7 +8,7 @@ import { Toaster } from "react-hot-toast";
 import AuthProvider from "./providers/AuthProvider";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <div className="max-w-7xl mx-auto">
+  <div className="max-w-7xl mx-auto font-poppins">
     <AuthProvider>
       <RouterProvider router={router} />
       <Toaster />
