@@ -7,7 +7,7 @@ import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-  const { createUser, updateUser, logout } = useAuth();
+  const { createUser, updateUser, logout, loading } = useAuth();
   const [passwordMatchError, setPasswordMatchError] = useState("");
   const [show, setShow] = useState(false);
   const [cShow, setCShow] = useState(false);
@@ -60,7 +60,7 @@ const SignUp = () => {
                   .catch(() => toast.error("Something went wrong"));
               });
             })
-            .catch((err) => toast.error(err));
+            .catch(() => toast.error("Please provide valid information"));
         }
       });
   };
@@ -238,7 +238,7 @@ const SignUp = () => {
             </label>
           </div>
           <div className="mt-5">
-            <button type="submit" className="button-primary">
+            <button type="submit" disabled={loading} className="button-primary">
               Sign Up now
             </button>
           </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
+import { FaRegUserCircle, FaShoppingCart } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -25,6 +26,26 @@ const Navbar = () => {
       >
         Shop
       </NavLink>
+
+      <NavLink
+        className={navLinkClassName}
+        style={{ backgroundColor: "transparent" }}
+      >
+        {user?.photoURL ? (
+          <div className="avatar tooltip tooltip-bottom" data-tip={user?.displayName}>
+            <div className="w-8 rounded-full">
+              <img src={user?.photoURL} />
+            </div>
+          </div>
+        ) : (
+          <FaRegUserCircle size={24} />
+        )}
+      </NavLink>
+
+      <div className="px-3 relative">
+        <div className="badge badge-primary text-xs absolute -mt-3 -right-2 ">0</div>
+        <FaShoppingCart size={20} className="text-white" />
+      </div>
 
       {user ? (
         <NavLink
@@ -67,7 +88,7 @@ const Navbar = () => {
           <div className="hidden md:block">
             <div className="ml-4 flex items-center md:ml-6">
               {/* Navbar items */}
-              <div className="ml-10 flex items-baseline space-x-4">
+              <div className="ml-10 flex items-center  space-x-4">
                 {navItems}
               </div>
             </div>
