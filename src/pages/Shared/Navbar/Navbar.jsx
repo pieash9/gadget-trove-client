@@ -40,7 +40,7 @@ const Navbar = () => {
   console.log(allCarts);
   const navLinkClassName = ({ isActive }) =>
     isActive
-      ? "text-white font-semibold  bg-gray-700"
+      ? "text-white font-semibold  bg-gray-700 mx-3 py-1 border-b-2"
       : "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium";
 
   const navItems = (
@@ -59,14 +59,33 @@ const Navbar = () => {
       >
         Shop
       </NavLink>
-
       <NavLink
         className={navLinkClassName}
+        style={{ backgroundColor: "transparent" }}
+        to="/contact"
+      >
+        Contact
+      </NavLink>
+      <NavLink
+        className={navLinkClassName}
+        style={{ backgroundColor: "transparent" }}
+        to="/dashboard"
+      >
+        Dashboard
+      </NavLink>
+    </>
+  );
+
+  // nav image and login logout
+  const navImageLogout = (
+    <>
+      <NavLink
+        className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
         style={{ backgroundColor: "transparent" }}
       >
         {user?.photoURL ? (
           <div
-            className="avatar tooltip tooltip-bottom"
+            className="avatar tooltip tooltip-bottom "
             data-tip={user?.displayName}
           >
             <div className="w-8 rounded-full">
@@ -93,7 +112,7 @@ const Navbar = () => {
 
       {user ? (
         <NavLink
-          className={navLinkClassName}
+          className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium "
           style={{ backgroundColor: "transparent" }}
           onClick={logout}
         >
@@ -136,6 +155,9 @@ const Navbar = () => {
                 {navItems}
               </div>
             </div>
+          </div>
+          <div className="ml-10 flex items-center  space-x-4">
+            {navImageLogout}
           </div>
 
           {/* Mobile view */}
