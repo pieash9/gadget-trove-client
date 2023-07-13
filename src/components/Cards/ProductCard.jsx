@@ -1,10 +1,39 @@
 /* eslint-disable react/prop-types */
 import { FaStar } from "react-icons/fa";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { toast } from "react-hot-toast";
+import useAuth from "../../hooks/useAuth";
+import useCartItems from "../../hooks/useCartItems";
+
 const ProductCard = ({ product }) => {
-//   const { description, image, name, ratings, quantity, category, price } =
-//     product;
-  const {  image, name, ratings, price } =
-    product;
+  const { user } = useAuth();
+  const { refetch } = useCartItems();
+  //   const { description, image, name, ratings, quantity, category, price } =
+  //     product;
+  const { _id, image, name, ratings, price } = product;
+
+  const [axiosSecure] = useAxiosSecure();
+
+  const handleAddToCart = (_id) => {
+    console.log(_id);
+    axiosSecure
+      .put(`/carts`, {
+        price,
+        name,
+        image,
+        ratings,
+        productID: _id,
+        userEmail: user?.email,
+        quantity: 1,
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.data.insertedId || res.data.modifiedCount > 0) {
+          refetch();
+          toast.success("Product added to Cart");
+        }
+      });
+  };
   return (
     <div className="border rounded p-4 group h-full cursor-pointer">
       <img src={image} alt="" className="h-48 mx-auto" />
@@ -18,7 +47,10 @@ const ProductCard = ({ product }) => {
           ${price}
         </p>
         <div className="">
-          <button className="group-hover:block hidden hover:text-blue-300 duration-1000 uppercase mt-2 text-blue-500 font-medium">
+          <button
+            onClick={() => handleAddToCart(_id)}
+            className="group-hover:block hidden hover:text-blue-300 duration-1000 uppercase mt-2 text-blue-500 font-medium"
+          >
             Add to Cart
           </button>
         </div>

@@ -2,9 +2,42 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import { FaRegUserCircle, FaShoppingCart } from "react-icons/fa";
+import useCartItems from "../../../hooks/useCartItems";
+import CartModal from "../../../components/Modal/CartModal";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { toast } from "react-hot-toast";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
+  const { allCarts, refetch } = useCartItems();
+  const [isOpen, setIsOpen] = useState(false);
+  const [axiosSecure] = useAxiosSecure();
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+  // update cart item quantity
+  const handleUpdateQuantity = (id, quantityValue) => {
+    console.log(id, quantityValue);
+
+    axiosSecure.patch(`/carts/${id}?quantity=${quantityValue}`).then((res) => {
+      if (res.data.modifiedCount) {
+        refetch();
+      }
+    });
+  };
+
+  //delete cart data
+  const handleDelete = (id) => {
+    axiosSecure.delete(`/carts/${id}`).then((res) => {
+      if (res.data.deletedCount > 0) {
+        refetch();
+        return toast.success("Item removed");
+      }
+    });
+  };
+
+  console.log(allCarts);
   const navLinkClassName = ({ isActive }) =>
     isActive
       ? "text-white font-semibold  bg-gray-700"
@@ -32,7 +65,10 @@ const Navbar = () => {
         style={{ backgroundColor: "transparent" }}
       >
         {user?.photoURL ? (
-          <div className="avatar tooltip tooltip-bottom" data-tip={user?.displayName}>
+          <div
+            className="avatar tooltip tooltip-bottom"
+            data-tip={user?.displayName}
+          >
             <div className="w-8 rounded-full">
               <img src={user?.photoURL} />
             </div>
@@ -43,8 +79,16 @@ const Navbar = () => {
       </NavLink>
 
       <div className="px-3 relative">
-        <div className="badge badge-primary text-xs absolute -mt-3 -right-2 ">0</div>
-        <FaShoppingCart size={20} className="text-white" />
+        <div className="badge badge-primary text-xs absolute -mt-3 -right-2 ">
+          {/* cart length  */}
+
+          {allCarts?.length}
+        </div>
+        <FaShoppingCart
+          onClick={() => setIsOpen(true)}
+          size={20}
+          className="text-white cursor-pointer"
+        />
       </div>
 
       {user ? (
@@ -74,7 +118,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gray-500 sticky top-0 z-50">
+    <nav className="bg-gray-700 sticky top-0 z-50">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
@@ -128,6 +172,13 @@ const Navbar = () => {
           </div>
         </div>
       )}
+      <CartModal
+        isOpen={isOpen}
+        closeModal={closeModal}
+        allCarts={allCarts}
+        handleDelete={handleDelete}
+        handleUpdateQuantity={handleUpdateQuantity}
+      />
     </nav>
   );
 };

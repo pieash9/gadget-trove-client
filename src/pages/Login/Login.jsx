@@ -22,9 +22,9 @@ const Login = () => {
   } = useForm(); //form submit using react-hook
 
   //loading
-  if (loading) {
-    return <Loader />;
-  }
+  // if (loading) {
+  //   return <Loader />;
+  // }
   const onSubmit = (data) => {
     console.log(data);
     login(data.email, data.password)

@@ -11,6 +11,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
+import axios from "axios";
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
@@ -54,6 +55,17 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      if (currentUser?.email) {
+        axios
+          .post(`http://localhost:5000/jwt`, { email: currentUser?.email })
+          .then((data) => {
+            localStorage.setItem("access-token", data.data);
+            setLoading(false);
+          });
+      } else {
+        localStorage.removeItem("access-token");
+        setLoading(false);
+      }
       console.log(currentUser);
       setLoading(false);
     });
