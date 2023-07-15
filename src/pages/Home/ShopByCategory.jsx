@@ -27,7 +27,7 @@ const ShopByCategory = () => {
                 alt=""
                 width={50}
               />
-              <p className="text-gray-600">{category.categoryName} </p>
+              <p className="text-gray-600 text-sm">{category.categoryName} </p>
             </div>
           ))}
       </div>

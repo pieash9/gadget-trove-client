@@ -1,21 +1,19 @@
 /* eslint-disable react/prop-types */
 import { FaStar } from "react-icons/fa";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { toast } from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import useCartItems from "../../hooks/useCartItems";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const ProductCard = ({ product }) => {
   const { user } = useAuth();
   const { refetch } = useCartItems();
+  const [axiosSecure] = useAxiosSecure();
   //   const { description, image, name, ratings, quantity, category, price } =
   //     product;
   const { _id, image, name, ratings, price } = product;
 
-  const [axiosSecure] = useAxiosSecure();
-
   const handleAddToCart = (_id) => {
-    console.log(_id);
     axiosSecure
       .put(`/carts`, {
         price,

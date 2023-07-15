@@ -5,12 +5,14 @@ import { FaEyeSlash, FaEye } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SignUp = () => {
-  const { createUser, updateUser, logout, loading } = useAuth();
+  const { createUser, updateUser, logout } = useAuth();
   const [passwordMatchError, setPasswordMatchError] = useState("");
   const [show, setShow] = useState(false);
   const [cShow, setCShow] = useState(false);
+
   const image_hosting_token = import.meta.env.VITE_IBB_KEY;
   const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_token}`;
 
@@ -46,7 +48,9 @@ const SignUp = () => {
             email: data.email,
             image: imgUrl,
             createdAt: new Date(),
+            role: "user",
           };
+          console.log(userData);
           //todo add data to server
           //create user using email,password
           createUser(data.email, data.password)
@@ -54,8 +58,16 @@ const SignUp = () => {
               updateUser(data.name, imgUrl).then(() => {
                 logout()
                   .then(() => {
-                    navigate("/login");
-                    toast.success("Sign Completed. Login Now!");
+                    axios
+                      .post(`http://localhost:5000/users/:${data.email}`, {
+                        ...userData,
+                      })
+                      .then((res) => {
+                        console.log(res.data);
+                        navigate("/login");
+                        toast.success("Sign Up Completed. Login Now!");
+                      })
+                      .catch((err) => console.log(err));
                   })
                   .catch(() => toast.error("Something went wrong"));
               });
@@ -238,7 +250,7 @@ const SignUp = () => {
             </label>
           </div>
           <div className="mt-5">
-            <button type="submit" disabled={loading} className="button-primary">
+            <button type="submit" className="button-primary">
               Sign Up now
             </button>
           </div>

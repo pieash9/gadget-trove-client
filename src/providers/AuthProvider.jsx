@@ -12,11 +12,12 @@ import {
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
 import axios from "axios";
-const auth = getAuth(app);
-const googleProvider = new GoogleAuthProvider();
 
 export const AuthContext = createContext(null);
+const auth = getAuth(app);
+
 const AuthProvider = ({ children }) => {
+  const googleProvider = new GoogleAuthProvider();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -55,6 +56,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      console.log(currentUser);
       if (currentUser?.email) {
         axios
           .post(`http://localhost:5000/jwt`, { email: currentUser?.email })
@@ -66,7 +68,7 @@ const AuthProvider = ({ children }) => {
         localStorage.removeItem("access-token");
         setLoading(false);
       }
-      console.log(currentUser);
+      
       setLoading(false);
     });
     return () => {

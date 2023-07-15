@@ -41,7 +41,7 @@ const Navbar = () => {
   const navLinkClassName = ({ isActive }) =>
     isActive
       ? "text-white font-semibold  bg-gray-700 mx-3 py-1 border-b-2"
-      : "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium";
+      : "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-1 rounded-md font-medium";
 
   const navItems = (
     <>
