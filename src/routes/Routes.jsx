@@ -8,6 +8,7 @@ import Login from "../pages/Login/Login";
 import DashboardLayout from "../layout/DashboardLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Contact from "../pages/Contact/Contact";
+import ShopCategory from "../components/Shop/ShopCategory";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,12 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "products/:category",
+        element: <ShopCategory />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/products/${params.category}`),
       },
     ],
   },

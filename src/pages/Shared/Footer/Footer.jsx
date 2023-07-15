@@ -2,13 +2,15 @@ import logo from "../../../assets/logo.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800">
+    <footer className="bg-gray-800 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col md:flex-row md:justify-between">
           {/* Logo */}
           <div className="flex items-center mb-4 md:mb-0">
             <img className="h-8 w-8 mr-2" src={logo} alt="Logo" />
-            <span className="text-white text-lg font-semibold">GadgetTrove</span>
+            <span className="text-white text-lg font-semibold">
+              GadgetTrove
+            </span>
           </div>
 
           {/* Address */}

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
 
 const ShopByCategory = () => {
   // get all category data
@@ -16,19 +17,15 @@ const ShopByCategory = () => {
         {allCategory &&
           allCategory.length > 0 &&
           allCategory.map((category) => (
-            <div
+            <Link
+              to={`products/${category.category}`}
               className="cursor-pointer flex flex-col justify-center items-center hover:opacity-70"
               key={category._id}
             >
               {" "}
-              <img
-                className="mb-2"
-                src={category.image}
-                alt=""
-                width={50}
-              />
-              <p className="text-gray-600 text-sm">{category.categoryName} </p>
-            </div>
+              <img className="mb-2" src={category.image} alt="" width={50} />
+              <p className="text-gray-600 text-sm">{category.category} </p>
+            </Link>
           ))}
       </div>
     </div>

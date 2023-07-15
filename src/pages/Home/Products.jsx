@@ -16,11 +16,12 @@ const Products = () => {
       {isLoading && <Loader />}
 
       <div className="flex items-center">
-        <h3 className="text-gray-700 text-xl my-5">All Accessories</h3>
+        <h3 className="text-gray-700 text-xl my-2">All Gadgets</h3>
         <hr className="flex-grow ml-4 border-gray-300" />
       </div>
+      <p className="text-gray-500 mb-5 text-sm ">Exclusive Collection</p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5">
         {allProducts &&
           allProducts.length > 0 &&
           allProducts.map((product) => (
