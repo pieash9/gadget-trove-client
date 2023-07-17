@@ -39,7 +39,7 @@ const SoundDevice = () => {
 
       <div className="flex gap-5">
         <div className="md:w-1/5">
-          <img className="h-96 rounded" src="https://i.ibb.co/nM7X8HN/image.png" alt="" />
+          <img className="h-[350px] rounded" src="https://i.ibb.co/nM7X8HN/image.png" alt="" />
         </div>
         {/* React tabs */}
         <Tabs className="md:w-4/5">
@@ -66,7 +66,7 @@ const SoundDevice = () => {
           <hr className="h-[2px] bg-slate-300" />
 
           <TabPanel>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5 mt-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4  gap-5 mt-5">
               {categoryEarBuds &&
                 categoryEarBuds.length > 0 &&
                 categoryEarBuds.map((product) => (
@@ -75,7 +75,7 @@ const SoundDevice = () => {
             </div>
           </TabPanel>
           <TabPanel>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4  gap-5">
               {categoryHeadphones &&
                 categoryHeadphones.length > 0 &&
                 categoryHeadphones.map((product) => (
@@ -84,7 +84,7 @@ const SoundDevice = () => {
             </div>
           </TabPanel>
           <TabPanel>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5 mt-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4  gap-5 mt-5">
               {categorySpeakers &&
                 categorySpeakers.length > 0 &&
                 categorySpeakers.map((product) => (

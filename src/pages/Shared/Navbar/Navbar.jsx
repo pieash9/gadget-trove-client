@@ -37,11 +37,10 @@ const Navbar = () => {
     });
   };
 
-  console.log(allCarts);
   const navLinkClassName = ({ isActive }) =>
     isActive
-      ? "text-white font-semibold  bg-gray-700 mx-3 py-1 border-b-2"
-      : "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-1 rounded-md font-medium";
+      ? "text-white font-semibold  bg-gray-700  py-1 border-b-2"
+      : "text-gray-300 hover:bg-gray-700 hover:text-white py-1  font-medium";
 
   const navItems = (
     <>
@@ -151,7 +150,7 @@ const Navbar = () => {
           <div className="hidden md:block">
             <div className="ml-4 flex items-center md:ml-6">
               {/* Navbar items */}
-              <div className="ml-10 flex items-center  space-x-4">
+              <div className="ml-10 flex items-center gap-7">
                 {navItems}
               </div>
             </div>

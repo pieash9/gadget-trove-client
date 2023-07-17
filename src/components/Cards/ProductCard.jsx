@@ -33,7 +33,7 @@ const ProductCard = ({ product }) => {
       });
   };
   return (
-    <div className="border rounded p-4 group h-full cursor-pointer flex flex-col justify-center items-center">
+    <div className="border border-gray-300 rounded p-4 group h-full cursor-pointer flex flex-col justify-center items-center">
       <img src={image} alt="" className="h-40 mx-auto" />
       <div className="mt-5">
         <h3 className="text-base font-medium text-gray-700">{name}</h3>

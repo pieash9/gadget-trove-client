@@ -9,6 +9,8 @@ import DashboardLayout from "../layout/DashboardLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Contact from "../pages/Contact/Contact";
 import ShopCategory from "../components/Shop/ShopCategory";
+import AddProduct from "../pages/Dashboard/Seller/AddProduct";
+import ManageProducts from "../pages/Dashboard/Seller/ManageProducts";
 
 const router = createBrowserRouter([
   {
@@ -50,8 +52,16 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/dashboard",
+        path: "dashboard",
         element: <Dashboard />,
+      },
+      {
+        path: "seller/addProduct",
+        element: <AddProduct />,
+      },
+      {
+        path: "seller/manageProduct",
+        element: <ManageProducts />,
       },
     ],
   },
