@@ -1,6 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
 import { MdAddCircle, MdBorderColor } from "react-icons/md";
+import { BsFillPersonFill } from "react-icons/bs";
 import logo from "../../assets/logo.png";
 const Dashboard = () => {
   //navLink style
@@ -14,9 +15,6 @@ const Dashboard = () => {
       <div className="drawer lg:drawer-open ">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content m-5">
-          {/* Page content here */}
-          <Outlet />
-
           <label
             htmlFor="my-drawer-2"
             className="btn btn-circle swap swap-rotate drawer-button lg:hidden"
@@ -41,6 +39,8 @@ const Dashboard = () => {
               <polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" />
             </svg>
           </label>
+          {/* Page content here */}
+          <Outlet />
         </div>
         <div className="drawer-side">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
@@ -62,9 +62,18 @@ const Dashboard = () => {
                   <span>Order Management</span>
                 </div>
               </NavLink>
+              <NavLink className={navLinkClassName} to="seller/sellerProfile">
+                <div className="flex items-center">
+                  {" "}
+                  <BsFillPersonFill className="inline mr-2" size={18} />{" "}
+                  <span>Profile</span>
+                </div>
+              </NavLink>
             </div>
 
+            {/* Back to Home */}
             <hr className="bg-white my-4" />
+
             <div className="flex flex-col gap-3 text-base">
               <NavLink className={navLinkClassName} to="/">
                 <div className="flex items-center">

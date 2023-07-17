@@ -11,6 +11,7 @@ import Contact from "../pages/Contact/Contact";
 import ShopCategory from "../components/Shop/ShopCategory";
 import AddProduct from "../pages/Dashboard/Seller/AddProduct";
 import ManageProducts from "../pages/Dashboard/Seller/ManageProducts";
+import SellerProfile from "../pages/Dashboard/Seller/SellerProfile";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "seller/manageProduct",
         element: <ManageProducts />,
+      },
+      {
+        path: "seller/sellerProfile",
+        element: <SellerProfile />,
       },
     ],
   },
