@@ -3,6 +3,7 @@ import { AiFillHome } from "react-icons/ai";
 import { MdAddCircle, MdBorderColor } from "react-icons/md";
 import { BsFillPersonFill } from "react-icons/bs";
 import logo from "../../assets/logo.png";
+import { FaProductHunt } from "react-icons/fa";
 const Dashboard = () => {
   //navLink style
   const navLinkClassName = ({ isActive }) =>
@@ -60,6 +61,13 @@ const Dashboard = () => {
                   {" "}
                   <MdBorderColor className="inline mr-2" size={18} />{" "}
                   <span>Order Management</span>
+                </div>
+              </NavLink>
+              <NavLink className={navLinkClassName} to="seller/myProducts">
+                <div className="flex items-center">
+                  {" "}
+                  <FaProductHunt className="inline mr-2" size={18} />{" "}
+                  <span>My Products</span>
                 </div>
               </NavLink>
               <NavLink className={navLinkClassName} to="seller/sellerProfile">

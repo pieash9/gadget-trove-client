@@ -30,8 +30,7 @@ const SignUp = () => {
       return setPasswordMatchError("Password & Confirm Password did not match");
     }
     setPasswordMatchError("");
-    console.log(data);
-
+ 
     const formData = new FormData(); //creating formData for upload image
     formData.append("image", data.image[0]); //getting image data
     fetch(image_hosting_url, {
@@ -51,7 +50,7 @@ const SignUp = () => {
             role: "user",
           };
           console.log(userData);
-          //todo add data to server
+          
           //create user using email,password
           createUser(data.email, data.password)
             .then(() => {
