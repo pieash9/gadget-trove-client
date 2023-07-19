@@ -3,7 +3,7 @@ import { useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import ReadMoreReact from "read-more-react";
 import EditProductModal from "../Modal/EditProductModal";
-const SellerProductCard = ({ product }) => {
+const SellerProductCard = ({ product, refetch }) => {
   const {
     name,
     price,
@@ -72,20 +72,23 @@ const SellerProductCard = ({ product }) => {
             year: "numeric",
           })} `}
         </p>
-        <p className="text-gray-600 text-sm mb-2">
+        <div className="text-gray-600 text-sm mb-2">
           Product Details:
           <ReadMoreReact
             text={description}
             min={0}
             ideal={12}
             max={description.length}
-            readMoreText={
-              <span style={{ color: "blue", cursor: "pointer" }}>... more</span>
-            }
+            readMoreText="... Read More"
           />
-        </p>
+        </div>
       </div>
-      <EditProductModal isOpen={isOpen} closeModal={closeModal} />
+      <EditProductModal
+        isOpen={isOpen}
+        closeModal={closeModal}
+        product={product}
+        refetch={refetch}
+      />
     </div>
   );
 };

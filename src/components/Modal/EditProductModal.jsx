@@ -6,10 +6,8 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import useAuth from "../../hooks/useAuth";
 
-const EditProductModal = ({ isOpen, closeModal }) => {
-  const { user } = useAuth();
+const EditProductModal = ({ isOpen, closeModal, product, refetch }) => {
   const [loading, setLoading] = useState(false);
   const [axiosSecure] = useAxiosSecure();
   const image_hosting_token = import.meta.env.VITE_IBB_KEY;
@@ -37,8 +35,6 @@ const EditProductModal = ({ isOpen, closeModal }) => {
 
           const productData = {
             name: data.productName,
-            sellerEmail: data.email,
-            sellerName: data.sellerName,
             price: data.price,
             image: imgUrl,
             category: data.category,
@@ -46,14 +42,14 @@ const EditProductModal = ({ isOpen, closeModal }) => {
             description: data.description,
             createdAt: new Date(),
           };
-          console.log(productData);
           axiosSecure
-            .post("/products", { ...productData })
+            .patch(`/products/${product._id}`, { ...productData })
             .then((res) => {
-              if (res.data.insertedId) {
+              if (res.data) {
                 setLoading(false);
                 reset();
-                toast.success("Product added");
+                refetch();
+                toast.success("Product Updated");
               }
             })
             .catch(() => {
@@ -121,6 +117,7 @@ const EditProductModal = ({ isOpen, closeModal }) => {
                               type="name"
                               id="productName"
                               className={inputClassName}
+                              defaultValue={product.name}
                               placeholder=" "
                             />
 
@@ -144,6 +141,7 @@ const EditProductModal = ({ isOpen, closeModal }) => {
                               type="text"
                               id="price"
                               className={inputClassName}
+                              defaultValue={product.price}
                               placeholder=" "
                             />
 
@@ -153,51 +151,6 @@ const EditProductModal = ({ isOpen, closeModal }) => {
                             {errors.price && (
                               <span className="text-red-500 text-sm">
                                 Price is required
-                              </span>
-                            )}
-                          </div>
-                        </div>
-
-                        {/* Email & Seller Name*/}
-                        <div className="md:flex md:gap-10 gap-5">
-                          <div className="relative z-0 w-full mb-6 group">
-                            <input
-                              {...register("email", { required: true })}
-                              type="email"
-                              id="email"
-                              className={inputClassName}
-                              defaultValue={user?.email}
-                              readOnly
-                            />
-                            <label htmlFor="email" className={labelClassName}>
-                              Email <span className="text-red-500">*</span>
-                            </label>
-                            {errors.email && (
-                              <span className="text-red-500 text-sm">
-                                Email is required
-                              </span>
-                            )}
-                          </div>
-
-                          <div className="relative z-0 w-full mb-6 group">
-                            <input
-                              {...register("sellerName", { required: true })}
-                              type="text"
-                              id="sellerName"
-                              className={inputClassName}
-                              defaultValue={user?.displayName}
-                              readOnly
-                            />
-                            <label
-                              htmlFor="sellerName"
-                              className={labelClassName}
-                            >
-                              Seller Name{" "}
-                              <span className="text-red-500">*</span>
-                            </label>
-                            {errors.sellerName && (
-                              <span className="text-red-500 text-sm">
-                                Seller Name is required
                               </span>
                             )}
                           </div>
@@ -224,8 +177,9 @@ const EditProductModal = ({ isOpen, closeModal }) => {
 
                           <div className="relative z-0 w-full mb-6 group flex border-b-2 pb-1 border-gray-300">
                             <select
+                              defaultValue={product.category}
                               id="category"
-                              className="select focus:outline-none border text-gray-700 font-thin border-gray-300 select-sm w-full mt-3 border-b-2"
+                              className="select focus:outline-none border text-gray-700  border-gray-300 select-sm w-full mt-3 border-b-2"
                               {...register("category", { required: true })}
                             >
                               <option value="headphones">Headphones</option>
@@ -262,6 +216,7 @@ const EditProductModal = ({ isOpen, closeModal }) => {
                               type="number"
                               id="quantity"
                               className={inputClassName}
+                              defaultValue={product.quantity}
                               placeholder=" "
                             />
 
@@ -286,6 +241,7 @@ const EditProductModal = ({ isOpen, closeModal }) => {
                               id="description"
                               className={inputClassName}
                               placeholder=" "
+                              defaultValue={product.description}
                               minLength={200} //set description word minimum 200 characters
                             />
 
@@ -304,13 +260,16 @@ const EditProductModal = ({ isOpen, closeModal }) => {
                           </div>
                         </div>
 
-                        <div className="mt-2">
+                        <div
+                          className="mt-2 flex justify-center"
+                          onClose={closeModal}
+                        >
                           <button
                             disabled={loading}
                             type="submit"
                             className="button-primary disabled:bg-gray-400 flex items-center"
                           >
-                            <span> Add Product</span>
+                            <span> Update</span>
                             {loading && (
                               <span className="loading loading-spinner loading-sm ml-2"></span>
                             )}

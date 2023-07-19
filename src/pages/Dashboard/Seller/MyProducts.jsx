@@ -26,7 +26,11 @@ const MyProducts = () => {
         {isLoading && <LoadingSpinner />}
         {sellerProducts.length > 0 &&
           sellerProducts.map((product) => (
-            <SellerProductCard key={product._id} product={product} />
+            <SellerProductCard
+              key={product._id}
+              product={product}
+              refetch={refetch}
+            />
           ))}
       </div>
     </div>
