@@ -56,13 +56,6 @@ const Dashboard = () => {
                   <span>Add a Product</span>
                 </div>
               </NavLink>
-              <NavLink className={navLinkClassName} to="seller/manageProduct">
-                <div className="flex items-center">
-                  {" "}
-                  <MdBorderColor className="inline mr-2" size={18} />{" "}
-                  <span>Order Management</span>
-                </div>
-              </NavLink>
               <NavLink className={navLinkClassName} to="seller/myProducts">
                 <div className="flex items-center">
                   {" "}
@@ -70,6 +63,14 @@ const Dashboard = () => {
                   <span>My Products</span>
                 </div>
               </NavLink>
+              <NavLink className={navLinkClassName} to="seller/manageProduct">
+                <div className="flex items-center">
+                  {" "}
+                  <MdBorderColor className="inline mr-2" size={18} />{" "}
+                  <span>Order Management</span>
+                </div>
+              </NavLink>
+
               <NavLink className={navLinkClassName} to="seller/sellerProfile">
                 <div className="flex items-center">
                   {" "}

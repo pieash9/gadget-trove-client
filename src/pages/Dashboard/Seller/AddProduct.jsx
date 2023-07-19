@@ -34,7 +34,7 @@ const AddProduct = () => {
 
           const productData = {
             name: data.productName,
-            email: data.email,
+            sellerEmail: data.email,
             sellerName: data.sellerName,
             price: data.price,
             image: imgUrl,
@@ -67,13 +67,13 @@ const AddProduct = () => {
   return (
     <>
       <div>
-        <SectionTitle title={"Add A Product"} />
+        <SectionTitle title={"New Product"} />
 
         <div>
           <form
             onSubmit={handleSubmit(onSubmit)}
             autoComplete="off"
-            className=" border p-4 rounded"
+            className=" border p-4 rounded border-gray-300"
           >
             <div className="bg-base-100 rounded p-5">
               {/* Product Name & price*/}
@@ -169,7 +169,7 @@ const AddProduct = () => {
                     className={inputClassName}
                     placeholder=" "
                     accept="image/*"
-                    //TODO to make image required
+                    required                 
                   />
                   <label htmlFor="image" className={labelClassName}>
                     Choose Product Image <span className="text-red-500">*</span>
@@ -232,8 +232,8 @@ const AddProduct = () => {
                     id="description"
                     className={inputClassName}
                     placeholder=" "
-                    //   todo min length set
-                    //   minLength={200} //set description word minimum 200 characters
+                  
+                      minLength={200} //set description word minimum 200 characters
                   />
 
                   <label htmlFor="description" className={labelClassName}>
