@@ -1,10 +1,11 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
-import { MdAddCircle, MdBorderColor } from "react-icons/md";
+import { MdAddCircle, MdBorderColor, MdManageHistory } from "react-icons/md";
 import { BsFillPersonFill } from "react-icons/bs";
 import logo from "../../assets/logo.png";
-import { FaProductHunt } from "react-icons/fa";
+import { FaProductHunt, FaUsers } from "react-icons/fa";
 const Dashboard = () => {
+  const role = "admin";
   //navLink style
   const navLinkClassName = ({ isActive }) =>
     isActive
@@ -47,38 +48,59 @@ const Dashboard = () => {
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu p-4 w-48 md:w-64 h-full bg-slate-700 text-base-content">
             {/* Sidebar content here */}
-            <div className="flex flex-col gap-3 text-base">
-              <img className="w-20 mx-auto mb-5" src={logo} alt="" />
 
-              <NavLink className={navLinkClassName} to="seller/addProduct">
-                <div className="flex items-center">
-                  <MdAddCircle className="inline mr-2" size={18} />{" "}
-                  <span>Add a Product</span>
-                </div>
-              </NavLink>
-              <NavLink className={navLinkClassName} to="seller/myProducts">
-                <div className="flex items-center">
-                  {" "}
-                  <FaProductHunt className="inline mr-2" size={18} />{" "}
-                  <span>My Products</span>
-                </div>
-              </NavLink>
-              <NavLink className={navLinkClassName} to="seller/manageProduct">
-                <div className="flex items-center">
-                  {" "}
-                  <MdBorderColor className="inline mr-2" size={18} />{" "}
-                  <span>Order Management</span>
-                </div>
-              </NavLink>
+            {/* Admin */}
+            <img className="w-20 mx-auto mb-5" src={logo} alt="" />
+            {role === "admin" && (
+              <div className="flex flex-col gap-3 text-base">
+                <NavLink className={navLinkClassName} to="admin/manageUsers">
+                  <div className="flex items-center">
+                    <FaUsers className="inline mr-2" size={18} />{" "}
+                    <span>Manage Users</span>
+                  </div>
+                </NavLink>
+                <NavLink className={navLinkClassName} to="admin/manageProducts">
+                  <div className="flex items-center">
+                    <MdManageHistory className="inline mr-2" size={18} />{" "}
+                    <span>Manage Products</span>
+                  </div>
+                </NavLink>
+              </div>
+            )}
 
-              <NavLink className={navLinkClassName} to="seller/sellerProfile">
-                <div className="flex items-center">
-                  {" "}
-                  <BsFillPersonFill className="inline mr-2" size={18} />{" "}
-                  <span>Profile</span>
-                </div>
-              </NavLink>
-            </div>
+            {/* Seller */}
+            {role === "seller" && (
+              <div className="flex flex-col gap-3 text-base">
+                <NavLink className={navLinkClassName} to="seller/addProduct">
+                  <div className="flex items-center">
+                    <MdAddCircle className="inline mr-2" size={18} />{" "}
+                    <span>Add a Product</span>
+                  </div>
+                </NavLink>
+                <NavLink className={navLinkClassName} to="seller/myProducts">
+                  <div className="flex items-center">
+                    {" "}
+                    <FaProductHunt className="inline mr-2" size={18} />{" "}
+                    <span>My Products</span>
+                  </div>
+                </NavLink>
+                <NavLink className={navLinkClassName} to="seller/manageProduct">
+                  <div className="flex items-center">
+                    {" "}
+                    <MdBorderColor className="inline mr-2" size={18} />{" "}
+                    <span>Order Management</span>
+                  </div>
+                </NavLink>
+
+                <NavLink className={navLinkClassName} to="seller/sellerProfile">
+                  <div className="flex items-center">
+                    {" "}
+                    <BsFillPersonFill className="inline mr-2" size={18} />{" "}
+                    <span>Profile</span>
+                  </div>
+                </NavLink>
+              </div>
+            )}
 
             {/* Back to Home */}
             <hr className="bg-white my-4" />

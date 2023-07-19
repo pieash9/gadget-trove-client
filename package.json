@@ -26,7 +26,8 @@
     "react-router-dom": "^6.14.0",
     "react-tabs": "^6.0.1",
     "read-more-react": "^1.0.10",
-    "sort-by": "^0.0.2"
+    "sort-by": "^0.0.2",
+    "sweetalert2": "^11.7.18"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
