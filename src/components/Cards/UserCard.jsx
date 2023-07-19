@@ -16,7 +16,6 @@ const UserCard = ({ user, refetch }) => {
     axiosSecure.patch(`/users/${id}`, { role: userRole }).then((res) => {
       if (res.data.modifiedCount > 0) {
         refetch();
-        console.log(res.data);
         toast.success("User role updated");
       }
     });
@@ -36,7 +35,7 @@ const UserCard = ({ user, refetch }) => {
         axiosSecure
           .delete(`/users/${id}`)
           .then((res) => {
-            if (res.data) {
+            if (res.data.deletedCount > 0) {
               refetch();
               console.log(res.data);
               toast.success("User deleted");
@@ -77,7 +76,7 @@ const UserCard = ({ user, refetch }) => {
           >
             {role}{" "}
           </span>
-          <span className="tooltip tooltip-top " data-tip="Edit role">
+          <span className="tooltip tooltip-top " data-tip="Set role">
             <FaEdit
               onClick={() => setChangeRole(!changeRole)}
               className=" text-blue-400 cursor-pointer hover:text-blue-500  duration-300 "
@@ -91,7 +90,7 @@ const UserCard = ({ user, refetch }) => {
             <button
               disabled={role === "admin"}
               onClick={() => handleUserRole("admin", _id)}
-              className={` text-red-400 bg-base-300 rounded px-2 py-px font-thin cursor-pointer inline hover:scale-95 duration-300 hover:bg-blue-200 disabled:bg-gray-400 disabled:text-white border border-gray-400 ${
+              className={` text-red-400 font-medium rounded px-2 py-px cursor-pointer inline hover:scale-95 duration-300 hover:bg-blue-200 disabled:bg-gray-400 disabled:text-white border border-gray-400 ${
                 role === "admin" && "cursor-not-allowed"
               }`}
             >
@@ -100,7 +99,7 @@ const UserCard = ({ user, refetch }) => {
             <button
               disabled={role === "seller"}
               onClick={() => handleUserRole("seller", _id)}
-              className={`text-purple-500 bg-base-300 rounded px-2 py-px font-thin cursor-pointer inline hover:scale-95 duration-300 hover:bg-blue-200 disabled:bg-gray-400 disabled:text-white border border-gray-400  ${
+              className={`text-purple-500 font-medium rounded px-2 py-px cursor-pointer inline hover:scale-95 duration-300 hover:bg-blue-200 disabled:bg-gray-400 disabled:text-white border border-gray-400  ${
                 role === "seller" && "cursor-not-allowed"
               }`}
             >
@@ -109,7 +108,7 @@ const UserCard = ({ user, refetch }) => {
             <button
               disabled={role === "user"}
               onClick={() => handleUserRole("user", _id)}
-              className={` text-blue-500 bg-base-300 rounded px-2 py-px font-thin cursor-pointer inline hover:scale-95 duration-300 hover:bg-blue-200 disabled:bg-gray-400 disabled:text-white border border-gray-400 ${
+              className={` text-blue-500 font-medium rounded px-2 py-px cursor-pointer inline hover:scale-95 duration-300 hover:bg-blue-200 disabled:bg-gray-400 disabled:text-white border border-gray-400 ${
                 role === "user" && "cursor-not-allowed"
               }`}
             >

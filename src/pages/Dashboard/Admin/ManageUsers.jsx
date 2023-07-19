@@ -11,8 +11,8 @@ const ManageUsers = () => {
     <div>
       <SectionTitle title={"Manage Users"} />
 
+      {isLoading && <LoadingSpinner />}
       <div className="div grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
-        {isLoading && <LoadingSpinner />}
         {allUserData.length > 0 &&
           allUserData.map((user) => (
             <UserCard

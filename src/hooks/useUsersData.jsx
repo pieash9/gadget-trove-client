@@ -1,20 +1,22 @@
 import { useQuery } from "react-query";
-import useAuth from "./useAuth";
 import useAxiosSecure from "./useAxiosSecure";
 
 const useUsersData = () => {
   const [axiosSecure] = useAxiosSecure();
-  const { user } = useAuth();
 
-  const { data: allUserData = [], refetch } = useQuery({
-    queryKey: ["allUsers", user?.email],
+  const {
+    data: allUserData = [],
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["allUsers"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/users`);
       return res.data;
     },
   });
 
-  return { allUserData, refetch };
+  return { allUserData, refetch, isLoading };
 };
 
 export default useUsersData;

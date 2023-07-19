@@ -14,6 +14,7 @@ import ManageProducts from "../pages/Dashboard/Seller/ManageProducts";
 import SellerProfile from "../pages/Dashboard/Seller/SellerProfile";
 import MyProducts from "../pages/Dashboard/Seller/MyProducts";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUSers";
+import ManageAllProducts from "../pages/Dashboard/Admin/ManageAllProducts";
 
 const router = createBrowserRouter([
   {
@@ -64,8 +65,8 @@ const router = createBrowserRouter([
         element: <ManageUsers />,
       },
       {
-        path: "admin/manageProducts",
-        element: <ManageProducts />,
+        path: "admin/manageAllProducts",
+        element: <ManageAllProducts />,
       },
 
       //? seller

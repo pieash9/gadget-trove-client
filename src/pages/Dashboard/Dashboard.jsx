@@ -59,7 +59,7 @@ const Dashboard = () => {
                     <span>Manage Users</span>
                   </div>
                 </NavLink>
-                <NavLink className={navLinkClassName} to="admin/manageProducts">
+                <NavLink className={navLinkClassName} to="admin/manageAllProducts">
                   <div className="flex items-center">
                     <MdManageHistory className="inline mr-2" size={18} />{" "}
                     <span>Manage Products</span>
