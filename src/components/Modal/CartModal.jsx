@@ -2,6 +2,8 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { motion } from "framer-motion";
+import { AiOutlineClose } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const CartModal = ({
   isOpen,
@@ -42,9 +44,16 @@ const CartModal = ({
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                  <button
+                    className="absolute right-4 top-4 text-2xl hover:opacity-100 opacity-60 tooltip tooltip-left"
+                    data-tip="close"
+                    onClick={closeModal}
+                  >
+                    <AiOutlineClose />
+                  </button>
                   <Dialog.Title
                     as="h3"
-                    className=" font-medium leading-6 text-gray-900 text-center text-2xl"
+                    className=" font-medium mb-5 leading-6 text-gray-700 text-center text-2xl"
                   >
                     Cart
                   </Dialog.Title>
@@ -88,8 +97,7 @@ const CartModal = ({
                               whileHover={{ x: "0", opacity: 1 }}
                               transition={{ duration: 1 }}
                               onClick={() => handleDelete(item._id)}
-                              className="cursor-pointer text-opacity-0 group-hover:text-opacity-100 text-red-500 text-3xl font-semibold  tooltip tooltip-top duration-1000 "
-                              data-tip="remove"
+                              className="cursor-pointer text-opacity-0 group-hover:text-opacity-100 text-red-500 text-3xl font-medium   duration-1000 "
                             >
                               x
                             </motion.button>
@@ -103,14 +111,19 @@ const CartModal = ({
                     <p className="text-xl font-semibold">${total.toFixed(2)}</p>
                   </div>
 
-                  <div className="mt-4">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
-                    >
-                      Got it, thanks!
+                  <div className="mt-4 text-center flex flex-col gap-3">
+                    <button type="button" className="button-primary">
+                      Checkout
                     </button>
+                    <Link to="/cart">
+                      <button
+                        onClick={closeModal}
+                        type="button"
+                        className="button-secondary w-full"
+                      >
+                        View Cart
+                      </button>
+                    </Link>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

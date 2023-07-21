@@ -17,12 +17,14 @@ import ManageUsers from "../pages/Dashboard/Admin/ManageUSers";
 import ManageAllProducts from "../pages/Dashboard/Admin/ManageAllProducts";
 import PrivateRoute from "./PrivateRoute";
 import ProductDetails from "../pages/Home/ProductDetails";
+import Cart from "../pages/Cart/Cart";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
     errorElement: <ErrorPage />,
+
     children: [
       {
         path: "/",
@@ -43,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
       {
         path: "products/:category",
