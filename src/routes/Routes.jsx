@@ -15,6 +15,8 @@ import SellerProfile from "../pages/Dashboard/Seller/SellerProfile";
 import MyProducts from "../pages/Dashboard/Seller/MyProducts";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUSers";
 import ManageAllProducts from "../pages/Dashboard/Admin/ManageAllProducts";
+import PrivateRoute from "./PrivateRoute";
+import ProductDetails from "../pages/Home/ProductDetails";
 
 const router = createBrowserRouter([
   {
@@ -48,11 +50,21 @@ const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:5000/products/${params.category}`),
       },
+      {
+        path: "item/:id",
+        element: <ProductDetails />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/singleProducts/${params.id}`),
+      },
     ],
   },
   {
     path: "dashboard",
-    element: <DashboardLayout />,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-// import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 const CartModal = ({
   isOpen,
@@ -53,10 +53,10 @@ const CartModal = ({
                       allCarts.length > 0 &&
                       allCarts.map((item) => (
                         <div key={item._id} className="group transition-all">
-                          <div className="flex items-center gap-5">
-                            <img className="w-20" src={item.image} alt="" />
+                          <div className="flex items-end gap-5">
+                            <img className="w-14" src={item.image} alt="" />
                             <div className="grow">
-                              <h3 className="mb-2">{item?.name}</h3>
+                              <h3 className="mb-2 font-medium">{item?.name}</h3>
                               <div className="flex justify-between">
                                 <div>
                                   <button
@@ -83,21 +83,16 @@ const CartModal = ({
                               </div>
                             </div>
 
-                            {/* <motion.button
-                              initial={{ x: "100%", opacity: 0 }}
+                            <motion.button
+                              initial={{ x: "100", opacity: 0.7 }}
                               whileHover={{ x: "0", opacity: 1 }}
-                              transition={{duration:1.5}}
+                              transition={{ duration: 1 }}
                               onClick={() => handleDelete(item._id)}
-                              className="cursor-pointer hidden hover:text-gray-400 group-hover:block text-xl font-semibold hover:transition hover:duration-[2000ms] "
+                              className="cursor-pointer text-opacity-0 group-hover:text-opacity-100 text-red-500 text-3xl font-semibold  tooltip tooltip-top duration-1000 "
+                              data-tip="remove"
                             >
                               x
-                            </motion.button> */}
-                            <button
-                              onClick={() => handleDelete(item._id)}
-                              className="cursor-pointer hidden hover:text-gray-400 group-hover:block text-xl font-semibold hover:transition hover:duration-[2000ms] "
-                            >
-                              x
-                            </button>
+                            </motion.button>
                           </div>
                         </div>
                       ))}

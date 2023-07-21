@@ -13,13 +13,13 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [axiosSecure] = useAxiosSecure();
 
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const closeModal = () => {
     setIsOpen(false);
   };
   // update cart item quantity
   const handleUpdateQuantity = (id, quantityValue) => {
-    console.log(id, quantityValue);
-
     axiosSecure.patch(`/carts/${id}?quantity=${quantityValue}`).then((res) => {
       if (res.data.modifiedCount) {
         refetch();
@@ -39,7 +39,7 @@ const Navbar = () => {
 
   const navLinkClassName = ({ isActive }) =>
     isActive
-      ? "text-white font-semibold  bg-gray-700  py-1 border-b-2"
+      ? "text-white font-semibold  bg-gray-700  border-b-2"
       : "text-gray-300 hover:bg-gray-700 hover:text-white py-1  font-medium";
 
   const navItems = (
@@ -79,7 +79,7 @@ const Navbar = () => {
   const navImageLogout = (
     <>
       <NavLink
-        className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
+        className="text-gray-300 hover:bg-gray-700 hover:text-white  py-2 rounded-md font-medium"
         style={{ backgroundColor: "transparent" }}
       >
         {user?.photoURL ? (
@@ -111,7 +111,7 @@ const Navbar = () => {
 
       {user ? (
         <NavLink
-          className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium "
+          className="text-gray-300 hover:bg-gray-700 hover:text-white  py-2 rounded-md font-medium "
           style={{ backgroundColor: "transparent" }}
           onClick={logout}
         >
@@ -128,8 +128,6 @@ const Navbar = () => {
       )}
     </>
   );
-
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -150,9 +148,7 @@ const Navbar = () => {
           <div className="hidden md:block">
             <div className="ml-4 flex items-center md:ml-6">
               {/* Navbar items */}
-              <div className="ml-10 flex items-center gap-7">
-                {navItems}
-              </div>
+              <div className="ml-10 flex items-center gap-7">{navItems}</div>
             </div>
           </div>
           <div className="ml-10 flex items-center  space-x-4">
