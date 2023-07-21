@@ -11,6 +11,7 @@ const CartModal = ({
   allCarts,
   handleDelete,
   handleUpdateQuantity,
+  loadingItemId,
 }) => {
   const total = allCarts.reduce(
     (total, item) => total + item.price * item.quantity,
@@ -63,11 +64,25 @@ const CartModal = ({
                       allCarts.map((item) => (
                         <div key={item._id} className="group transition-all">
                           <div className="flex items-end gap-5">
-                            <img className="w-14" src={item.image} alt="" />
+                            {/* set loading for a specific item only */}
+                            <div className="relative flex justify-center items-center">
+                              <div className="absolute">
+                                {loadingItemId === item._id && (
+                                  <span className="loading loading-spinner text-primary "></span>
+                                )}
+                              </div>
+                              <img
+                                className={`w-14 duration-500 ${
+                                  loadingItemId === item._id ? "opacity-40" : ""
+                                }`}
+                                src={item.image}
+                                alt=""
+                              />
+                            </div>
                             <div className="grow">
                               <h3 className="mb-2 font-medium">{item?.name}</h3>
                               <div className="flex justify-between">
-                                <div>
+                                <div className="">
                                   <button
                                     onClick={() =>
                                       handleUpdateQuantity(item?._id, 1)
@@ -79,6 +94,7 @@ const CartModal = ({
                                   </button>{" "}
                                   {item?.quantity}{" "}
                                   <button
+                                    disabled={item?.quantity === 1}
                                     onClick={() =>
                                       handleUpdateQuantity(item?._id, -1)
                                     }

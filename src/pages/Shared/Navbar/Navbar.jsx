@@ -14,15 +14,18 @@ const Navbar = () => {
   const [axiosSecure] = useAxiosSecure();
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [loadingItemId, setLoadingItemId] = useState(null);
 
   const closeModal = () => {
     setIsOpen(false);
   };
   // update cart item quantity
   const handleUpdateQuantity = (id, quantityValue) => {
+    setLoadingItemId(id);
     axiosSecure.patch(`/carts/${id}?quantity=${quantityValue}`).then((res) => {
       if (res.data.modifiedCount) {
         refetch();
+        setLoadingItemId(null);
       }
     });
   };
@@ -97,7 +100,7 @@ const Navbar = () => {
       </NavLink>
 
       <div className="px-3 relative">
-        <div className="badge badge-primary text-xs absolute -mt-3 -right-2 ">
+        <div className="badge badge-info badge-sm text-xs absolute -mt-2 -right-2 ">
           {/* cart length  */}
 
           {allCarts?.length}
@@ -195,6 +198,7 @@ const Navbar = () => {
         allCarts={allCarts}
         handleDelete={handleDelete}
         handleUpdateQuantity={handleUpdateQuantity}
+        loadingItemId={loadingItemId}
       />
     </nav>
   );
