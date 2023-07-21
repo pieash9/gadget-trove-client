@@ -18,6 +18,7 @@ import ManageAllProducts from "../pages/Dashboard/Admin/ManageAllProducts";
 import PrivateRoute from "./PrivateRoute";
 import ProductDetails from "../pages/Home/ProductDetails";
 import Cart from "../pages/Cart/Cart";
+import Checkout from "../pages/Checkout/Checkout";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/checkout",
+        element: <Checkout />,
       },
       {
         path: "products/:category",

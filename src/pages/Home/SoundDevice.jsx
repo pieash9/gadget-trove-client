@@ -39,26 +39,30 @@ const SoundDevice = () => {
 
       <div className="flex gap-5">
         <div className="md:w-1/5">
-          <img className="h-[350px] rounded" src="https://i.ibb.co/nM7X8HN/image.png" alt="" />
+          <img
+            className="h-[350px] rounded"
+            src="https://i.ibb.co/nM7X8HN/image.png"
+            alt=""
+          />
         </div>
         {/* React tabs */}
         <Tabs className="md:w-4/5">
           <TabList className="flex gap-5 items-center text-gray-600  ">
             <Tab
               className=" font-medium text-lg cursor-pointer"
-              selectedClassName="text-blue-500"
+              selectedClassName="text-sky-500"
             >
               EARBUDS
             </Tab>
             <Tab
               className=" font-medium text-lg cursor-pointer"
-              selectedClassName="text-blue-500"
+              selectedClassName="text-sky-500"
             >
               HEADPHONES
             </Tab>
             <Tab
               className=" font-medium text-lg cursor-pointer"
-              selectedClassName="text-blue-500"
+              selectedClassName="text-sky-500"
             >
               SPEAKER
             </Tab>
@@ -66,7 +70,7 @@ const SoundDevice = () => {
           <hr className="h-[2px] bg-slate-300" />
 
           <TabPanel>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4  gap-5 mt-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4  gap-5 mt-5">
               {categoryEarBuds &&
                 categoryEarBuds.length > 0 &&
                 categoryEarBuds.map((product) => (

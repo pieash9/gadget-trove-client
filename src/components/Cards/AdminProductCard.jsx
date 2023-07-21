@@ -79,7 +79,7 @@ const AdminProductCard = ({ product, refetch }) => {
           </div>
 
           <p className="text-gray-600 text-sm mb-2">
-            Price: <span className="text-blue-500">${price}</span>
+            Price: <span className="text-sky-500">${price}</span>
           </p>
           <p className="text-gray-600 text-sm mb-2 capitalize">
             Category: {category}
@@ -108,7 +108,7 @@ const AdminProductCard = ({ product, refetch }) => {
               >
                 <FaEdit
                   onClick={() => setChangeProductStatus(!changeProductStatus)}
-                  className=" text-blue-400 cursor-pointer hover:text-blue-500  duration-300 "
+                  className=" text-blue-400 cursor-pointer hover:text-sky-500  duration-300 "
                   size={20}
                 />
               </span>

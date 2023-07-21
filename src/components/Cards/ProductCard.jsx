@@ -51,7 +51,7 @@ const ProductCard = ({ product }) => {
       <div className="">
         <button
           onClick={() => handleAddToCart(_id)}
-          className="group-hover:block hidden hover:text-blue-300  ease-linear duration-500 uppercase mt-2 text-blue-500 font-medium"
+          className="group-hover:block hidden hover:text-blue-300  ease-linear duration-500 uppercase mt-2 text-sky-500 font-medium"
         >
           Add to Cart
         </button>

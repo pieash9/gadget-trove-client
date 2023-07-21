@@ -128,9 +128,15 @@ const CartModal = ({
                   </div>
 
                   <div className="mt-4 text-center flex flex-col gap-3">
-                    <button type="button" className="button-primary">
-                      Checkout
-                    </button>
+                    <Link to="/checkout">
+                      <button
+                        onClick={closeModal}
+                        type="button"
+                        className="button-primary w-full"
+                      >
+                        Checkout
+                      </button>
+                    </Link>
                     <Link to="/cart">
                       <button
                         onClick={closeModal}

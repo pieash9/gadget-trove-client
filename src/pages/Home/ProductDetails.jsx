@@ -21,7 +21,7 @@ const ProductDetails = () => {
           <div className="md:ml-8">
             <h2 className="text-2xl font-medium mb-4">{name}</h2>
             <p className="text-lg font-medium mb-2">
-              Price: <span className="text-blue-500">${price}</span>
+              Price: <span className="text-sky-500">${price}</span>
             </p>
             <p className="text-lg font-medium mb-2">
               Category: <span className="text-slate-500">{category}</span>
@@ -31,7 +31,7 @@ const ProductDetails = () => {
               <p className="text-gray-700 font-medium">Details:</p>{" "}
               {description}
             </p>
-            <button className="px-4 py-2 bg-blue-500 text-white rounded-md">
+            <button className="px-4 py-2 bg-sky-500 text-white rounded-md">
               Add to Cart
             </button>
           </div>

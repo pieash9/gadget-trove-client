@@ -71,7 +71,7 @@ const UserCard = ({ user, refetch }) => {
                 ? "bg-yellow-300 rounded px-2 py-px"
                 : role === "admin"
                 ? " bg-red-500 px-2 py-px rounded text-white"
-                : "bg-blue-500 px-2 py-px rounded text-white"
+                : "bg-sky-500 px-2 py-px rounded text-white"
             } capitalize font-thin mr-10 ml-2`}
           >
             {role}{" "}
@@ -79,7 +79,7 @@ const UserCard = ({ user, refetch }) => {
           <span className="tooltip tooltip-top " data-tip="Set role">
             <FaEdit
               onClick={() => setChangeRole(!changeRole)}
-              className=" text-blue-400 cursor-pointer hover:text-blue-500  duration-300 "
+              className=" text-blue-400 cursor-pointer hover:text-sky-500  duration-300 "
               size={20}
             />
           </span>
@@ -108,7 +108,7 @@ const UserCard = ({ user, refetch }) => {
             <button
               disabled={role === "user"}
               onClick={() => handleUserRole("user", _id)}
-              className={` text-blue-500 font-medium rounded px-2 py-px cursor-pointer inline hover:scale-95 duration-300 hover:bg-blue-200 disabled:bg-gray-400 disabled:text-white border border-gray-400 ${
+              className={` text-sky-500 font-medium rounded px-2 py-px cursor-pointer inline hover:scale-95 duration-300 hover:bg-blue-200 disabled:bg-gray-400 disabled:text-white border border-gray-400 ${
                 role === "user" && "cursor-not-allowed"
               }`}
             >

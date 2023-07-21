@@ -29,7 +29,7 @@ const SellerProductCard = ({ product, refetch }) => {
       >
         <FaEdit
           onClick={() => setIsOpen(true)}
-          className=" text-blue-400 cursor-pointer hover:text-blue-500  duration-500 "
+          className=" text-blue-400 cursor-pointer hover:text-sky-500  duration-500 "
           size={24}
         />
       </div>
@@ -73,7 +73,6 @@ const SellerProductCard = ({ product, refetch }) => {
         </p>
         <div className="text-gray-600 text-sm mb-2">
           Product Details: {description}
-          
         </div>
       </div>
       <EditProductModal

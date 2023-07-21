@@ -9,7 +9,7 @@ const Dashboard = () => {
   //navLink style
   const navLinkClassName = ({ isActive }) =>
     isActive
-      ? " font-medium  w-full text-white  bg-blue-500 px-3 py-1 rounded"
+      ? " font-medium  w-full text-white  bg-sky-500 px-3 py-1 rounded"
       : "text-gray-700 text-white w-full hover:bg-blue-400 font-base px-3 py-1 rounded";
 
   return (
@@ -59,7 +59,10 @@ const Dashboard = () => {
                     <span>Manage Users</span>
                   </div>
                 </NavLink>
-                <NavLink className={navLinkClassName} to="admin/manageAllProducts">
+                <NavLink
+                  className={navLinkClassName}
+                  to="admin/manageAllProducts"
+                >
                   <div className="flex items-center">
                     <MdManageHistory className="inline mr-2" size={18} />{" "}
                     <span>Manage Products</span>
