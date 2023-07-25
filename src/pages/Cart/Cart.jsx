@@ -156,7 +156,7 @@ const Cart = () => {
             </h3>
             <div className=" text-gray-700 ">
               <p className="flex text-sm">
-                <span className="grow font-semibold text-gray-700">
+                <span className="grow font-medium text-gray-700">
                   Subtotal
                 </span>{" "}
                 <span className="text-gray-500 font-normal ">
@@ -166,7 +166,7 @@ const Cart = () => {
               </p>
               <hr className="my-4" />
               <div className="flex justify-between text-sm">
-                <p className="grow font-semibold text-gray-700">Shipping</p>
+                <p className="grow font-medium text-gray-700">Shipping</p>
                 <div className="text-end">
                   <span>Delivery Charge:</span>{" "}
                   <span className="text-sky-500 font-medium ">$12</span>
@@ -183,7 +183,7 @@ const Cart = () => {
               <div className="text-center mt-5 ">
                 <Link to="/checkout">
                   <button type="button" className="button-primary w-full">
-                    Checkout
+                   Proceed To Checkout
                   </button>
                 </Link>
               </div>

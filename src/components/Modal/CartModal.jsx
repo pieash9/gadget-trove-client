@@ -62,7 +62,7 @@ const CartModal = ({
                     {allCarts &&
                       allCarts.length > 0 &&
                       allCarts.map((item) => (
-                        <div key={item._id} className="group transition-all">
+                        <div key={item._id} className="group transition-all border rounded p-2 shadow-md hover:shadow-xl duration-500">
                           <div className="flex items-end gap-5">
                             {/* set loading for a specific item only */}
                             <div className="relative flex justify-center items-center">
@@ -122,9 +122,9 @@ const CartModal = ({
                       ))}
                   </div>
 
-                  <div className="flex justify-between mt-4">
-                    <p className="text-lg">SubTotal</p>
-                    <p className="text-xl font-semibold">${total.toFixed(2)}</p>
+                  <div className="flex justify-between mt-10">
+                    <p className="text-lg text-gray-700 font-medium">SubTotal</p>
+                    <p className="text-xl font-semibold text-gray-700">${total.toFixed(2)}</p>
                   </div>
 
                   <div className="mt-4 text-center flex flex-col gap-3">
