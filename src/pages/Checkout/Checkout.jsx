@@ -3,9 +3,13 @@ import "react-tabs/style/react-tabs.css";
 import SectionTitle from "../../components/Title/SectionTitle";
 import { FaAddressCard } from "react-icons/fa";
 import { BsCreditCardFill } from "react-icons/bs";
-import CartAddressForm from "../../components/Form/CartAddressForm";
+import CheckoutAddressForm from "../../components/Form/CheckoutAddressForm";
+import { useState } from "react";
 
 const Checkout = () => {
+  const [formError, setFormError] = useState(null);
+  console.log(formError);
+
   return (
     <div className="mt-5">
       <SectionTitle title={"Checkout"} />
@@ -16,18 +20,21 @@ const Checkout = () => {
               className="font-medium cursor-pointer text-sky-500"
               selectedClassName="text-sky-500"
             >
-              <FaAddressCard className="inline mr-2" size={24}/> YOUR ADDRESS
+              <FaAddressCard className="inline mr-2" size={24} /> YOUR ADDRESS
             </Tab>
             <Tab
+              disabled
               className="font-medium cursor-pointer"
               selectedClassName="text-sky-500"
             >
-            <BsCreditCardFill className="inline mr-2" size={24}/>  ORDER & PAYMENT
+              <BsCreditCardFill className="inline mr-2" size={24} /> ORDER &
+              PAYMENT
             </Tab>
           </TabList>
 
           <TabPanel>
-           <CartAddressForm/>
+            {/* checkout form */}
+            <CheckoutAddressForm setFormError={setFormError} />
           </TabPanel>
           <TabPanel>
             <h2>Any content 2</h2>

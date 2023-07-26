@@ -1,17 +1,23 @@
+/* eslint-disable react/prop-types */
 import { useForm } from "react-hook-form";
 
 import useAuth from "../../hooks/useAuth";
 
-import Loader from "../../components/Loader/Loader";
+import Loader from "../Loader/Loader";
+import { useEffect } from "react";
 
-const CartAddressForm = () => {
-  const {  loading } = useAuth();
+const CheckoutAddressForm = ({ setFormError }) => {
+  const { loading } = useAuth();
 
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm(); //form submit using react-hook
+
+  useEffect(() => {
+    setFormError(errors);
+  }, [errors]);
 
   if (loading) {
     return <Loader />;
@@ -95,10 +101,12 @@ const CartAddressForm = () => {
               placeholder=" "
             />
             <label htmlFor="deliveryAddress" className={labelClassName}>
-            Delivery address<span className="text-red-500">*</span>
+              Delivery address<span className="text-red-500">*</span>
             </label>
             {errors.deliveryAddress && (
-              <span className="text-red-500 text-sm">Delivery address is required</span>
+              <span className="text-red-500 text-sm">
+                Delivery address is required
+              </span>
             )}
           </div>
 
@@ -112,10 +120,12 @@ const CartAddressForm = () => {
               placeholder=" "
             />
             <label htmlFor="cityName" className={labelClassName}>
-            City name<span className="text-red-500">*</span>
+              City name<span className="text-red-500">*</span>
             </label>
             {errors.cityName && (
-              <span className="text-red-500 text-sm">City name is required</span>
+              <span className="text-red-500 text-sm">
+                City name is required
+              </span>
             )}
           </div>
 
@@ -129,14 +139,14 @@ const CartAddressForm = () => {
               placeholder=" "
             />
             <label htmlFor="districtName" className={labelClassName}>
-            District name<span className="text-red-500">*</span>
+              District name<span className="text-red-500">*</span>
             </label>
             {errors.districtName && (
-              <span className="text-red-500 text-sm">District name is required</span>
+              <span className="text-red-500 text-sm">
+                District name is required
+              </span>
             )}
           </div>
-
-         
 
           <div className="mt-5">
             <button type="submit" className="button-primary">
@@ -149,4 +159,4 @@ const CartAddressForm = () => {
   );
 };
 
-export default CartAddressForm;
+export default CheckoutAddressForm;
