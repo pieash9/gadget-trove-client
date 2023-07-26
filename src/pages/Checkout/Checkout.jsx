@@ -3,6 +3,7 @@ import "react-tabs/style/react-tabs.css";
 import SectionTitle from "../../components/Title/SectionTitle";
 import { FaAddressCard } from "react-icons/fa";
 import { BsCreditCardFill } from "react-icons/bs";
+import CartAddressForm from "../../components/Form/CartAddressForm";
 
 const Checkout = () => {
   return (
@@ -26,7 +27,7 @@ const Checkout = () => {
           </TabList>
 
           <TabPanel>
-            <h2>Any content 1</h2>
+           <CartAddressForm/>
           </TabPanel>
           <TabPanel>
             <h2>Any content 2</h2>
