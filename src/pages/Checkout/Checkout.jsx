@@ -4,12 +4,9 @@ import SectionTitle from "../../components/Title/SectionTitle";
 import { FaAddressCard } from "react-icons/fa";
 import { BsCreditCardFill } from "react-icons/bs";
 import CheckoutAddressForm from "../../components/Form/CheckoutAddressForm";
-import { useState } from "react";
+import Payments from "../../components/utils/Payments";
 
 const Checkout = () => {
-  const [formError, setFormError] = useState(null);
-  console.log(formError);
-
   return (
     <div className="mt-5">
       <SectionTitle title={"Checkout"} />
@@ -23,7 +20,6 @@ const Checkout = () => {
               <FaAddressCard className="inline mr-2" size={24} /> YOUR ADDRESS
             </Tab>
             <Tab
-              disabled
               className="font-medium cursor-pointer"
               selectedClassName="text-sky-500"
             >
@@ -34,10 +30,10 @@ const Checkout = () => {
 
           <TabPanel>
             {/* checkout form */}
-            <CheckoutAddressForm setFormError={setFormError} />
+            <CheckoutAddressForm />
           </TabPanel>
           <TabPanel>
-            <h2>Any content 2</h2>
+            <Payments />
           </TabPanel>
         </Tabs>
       </div>
