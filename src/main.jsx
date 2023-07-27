@@ -11,7 +11,7 @@ const queryClient = new QueryClient();
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <div className="max-w-7xl mx-auto font-poppins">
+  <div className=" font-poppins">
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <RouterProvider router={router} />
