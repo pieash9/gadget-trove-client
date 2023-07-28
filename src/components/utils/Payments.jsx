@@ -1,4 +1,6 @@
 import useCartItems from "../../hooks/useCartItems";
+import bkashLogo from "../../assets/utils/logo.webp";
+import cardVisa from "../../assets/utils/card-visa.png";
 
 const Payments = () => {
   const { allCarts, refetch, isLoading } = useCartItems();
@@ -75,9 +77,14 @@ const Payments = () => {
             className="radio radio-info"
             checked
           />
-          <p>bKash (Payment) </p>
+          <span className="text-gray-700">bKash (Payment) </span>
+          <img src={bkashLogo} alt="" />
         </div>
-        <input type="radio" name="radio-7" className="radio radio-info" />
+        <div className="flex items-center gap-3">
+          <input type="radio" name="radio-7" className="radio radio-info" />
+          <span className="text-gray-700">VISA or MASTERCARD </span>
+          <img className="w-24" src={cardVisa} alt="card-visa-image" />
+        </div>
       </div>
     </div>
   );
