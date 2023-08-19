@@ -19,6 +19,9 @@ import PrivateRoute from "./PrivateRoute";
 import ProductDetails from "../pages/Home/ProductDetails";
 import Cart from "../pages/Cart/Cart";
 import Checkout from "../pages/Checkout/Checkout";
+import PaymentSuccess from "../components/PaymentStatus/PaymentSuccess";
+import PaymentFail from "../components/PaymentStatus/PaymentFail";
+import PaymentCancel from "../components/PaymentStatus/PaymentCancel";
 
 const router = createBrowserRouter([
   {
@@ -56,11 +59,24 @@ const router = createBrowserRouter([
         element: <Checkout />,
       },
       {
+        path: "payment/success/:tran_id",
+        element: <PaymentSuccess />,
+      },
+      {
+        path: "payment/fail/:tran_id",
+        element: <PaymentFail />,
+      },
+      {
+        path: "payment/cancel/:tran_id",
+        element: <PaymentCancel />,
+      },
+      {
         path: "products/:category",
         element: <ShopCategory />,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/products/${params.category}`),
       },
+
       {
         path: "item/:id",
         element: <ProductDetails />,

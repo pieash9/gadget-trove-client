@@ -1,8 +1,9 @@
 import useCartItems from "../../hooks/useCartItems";
 import ssl_commerz from "../../assets/utils/ssl_commerz.png";
 import cardVisa from "../../assets/utils/card-visa.png";
+import axios from "axios";
 
-const Payments = () => {
+const Payments = ({ formData }) => {
   const { allCarts, refetch, isLoading } = useCartItems();
 
   //total cart sum
@@ -17,8 +18,15 @@ const Payments = () => {
     0
   );
 
-  const handlePayment = (allCarts) => {
-    
+  const handlePayment = async (allCarts, totalPrice) => {
+    const res = await axios.post(`http://localhost:5000/orders`, {
+      allCarts,
+      totalPrice,
+      formData,
+    });
+    if (res.data) {
+      window.location.replace(res.data.url);
+    }
   };
   return (
     <div className=" my-10 md:w-3/5 mx-auto border p-4 rounded">
@@ -113,7 +121,7 @@ const Payments = () => {
       </div>
       <div className="mt-8 text-right">
         <button
-          onClick={() => handlePayment(allCarts)}
+          onClick={() => handlePayment(allCarts, totalPrice)}
           className="button-primary !bg-red-500 hover:!bg-red-600 duration-200"
         >
           Pay Now

@@ -8,9 +8,9 @@ import { useState } from "react";
 
 const Checkout = () => {
   const [formCompleted, setFormCompleted] = useState(false);
-  const [showTab, setShowTab] = useState(false);
+  const [formData, setFormData] = useState("");
 
-  console.log(formCompleted);
+  console.log(formData);
   return (
     <div className="mt-5">
       <SectionTitle title={"Checkout"} />
@@ -34,9 +34,12 @@ const Checkout = () => {
         </div>
         <div className="">
           {!formCompleted && (
-            <CheckoutAddressForm setFormCompleted={setFormCompleted} />
+            <CheckoutAddressForm
+              setFormCompleted={setFormCompleted}
+              setFormData={setFormData}
+            />
           )}
-          {formCompleted && <Payments />}
+          {formCompleted && <Payments formData={formData} />}
         </div>
       </div>
     </div>
