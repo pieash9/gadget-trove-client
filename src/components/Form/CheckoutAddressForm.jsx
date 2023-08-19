@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import Loader from "../Loader/Loader";
 
-const CheckoutAddressForm = () => {
+const CheckoutAddressForm = ({ setFormCompleted }) => {
   const { loading } = useAuth();
 
   const {
@@ -17,6 +17,7 @@ const CheckoutAddressForm = () => {
     return <Loader />;
   }
   const onSubmit = (data) => {
+    setFormCompleted(true);
     console.log(data);
   };
 

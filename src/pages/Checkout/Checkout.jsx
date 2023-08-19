@@ -1,41 +1,43 @@
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import SectionTitle from "../../components/Title/SectionTitle";
 import { FaAddressCard } from "react-icons/fa";
 import { BsCreditCardFill } from "react-icons/bs";
 import CheckoutAddressForm from "../../components/Form/CheckoutAddressForm";
 import Payments from "../../components/utils/Payments";
+import { useState } from "react";
 
 const Checkout = () => {
+  const [formCompleted, setFormCompleted] = useState(false);
+  const [showTab, setShowTab] = useState(false);
+
+  console.log(formCompleted);
   return (
     <div className="mt-5">
       <SectionTitle title={"Checkout"} />
       <div className="mt-5">
-        <Tabs>
-          <TabList className="text-center md:w-1/2 mx-auto bg-[#F9F9F9] flex justify-around tabs text-gray-600 py-3 shadow-md hover:shadow-xl duration-500">
-            <Tab
-              className="font-medium cursor-pointer text-sky-500"
-              selectedClassName="text-sky-500"
-            >
-              <FaAddressCard className="inline mr-2" size={24} /> YOUR ADDRESS
-            </Tab>
-            <Tab
-              className="font-medium cursor-pointer"
-              selectedClassName="text-sky-500"
-            >
-              <BsCreditCardFill className="inline mr-2" size={24} /> ORDER &
-              PAYMENT
-            </Tab>
-          </TabList>
-
-          <TabPanel>
-            {/* checkout form */}
-            <CheckoutAddressForm />
-          </TabPanel>
-          <TabPanel>
-            <Payments />
-          </TabPanel>
-        </Tabs>
+        <div className="text-center md:w-1/2 mx-auto bg-[#F9F9F9] flex justify-around tabs text-gray-600 py-3 shadow-md hover:shadow-lg duration-500">
+          <button
+            onClick={() => setFormCompleted(false)}
+            className="font-medium cursor-pointer text-sky-500"
+          >
+            <FaAddressCard className="inline mr-2" size={24} /> YOUR ADDRESS
+          </button>
+          <button
+            disabled={formCompleted == "false"}
+            className={`font-medium cursor-pointer ${
+              formCompleted && "text-sky-500"
+            }`}
+          >
+            <BsCreditCardFill className="inline mr-2" size={24} /> ORDER &
+            PAYMENT
+          </button>
+        </div>
+        <div className="">
+          {!formCompleted && (
+            <CheckoutAddressForm setFormCompleted={setFormCompleted} />
+          )}
+          {formCompleted && <Payments />}
+        </div>
       </div>
     </div>
   );
