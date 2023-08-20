@@ -1,11 +1,22 @@
+/* eslint-disable react/prop-types */
 import useCartItems from "../../hooks/useCartItems";
 import ssl_commerz from "../../assets/utils/ssl_commerz.png";
 import cardVisa from "../../assets/utils/card-visa.png";
 import axios from "axios";
+import { useState } from "react";
+import StripePaymentModal from "../Modal/StripePaymentModal";
 
 const Payments = ({ formData }) => {
-  const { allCarts, refetch, isLoading } = useCartItems();
+  const { allCarts } = useCartItems();
+  const [paymentMethod, setPaymentMethod] = useState("SSLCOMMERZ");
+  const [acceptTerms, setAcceptTerms] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  console.log(paymentMethod);
 
+  // close modal
+  const closeModal = () => {
+    setIsOpen(false);
+  };
   //total cart sum
   const totalPrice = allCarts.reduce(
     (total, item) => total + item.price * item.quantity,
@@ -19,13 +30,18 @@ const Payments = ({ formData }) => {
   );
 
   const handlePayment = async (allCarts, totalPrice) => {
-    const res = await axios.post(`http://localhost:5000/orders`, {
-      allCarts,
-      totalPrice,
-      formData,
-    });
-    if (res.data) {
-      window.location.replace(res.data.url);
+    if (paymentMethod == "SSLCOMMERZ") {
+      const res = await axios.post(`http://localhost:5000/orders`, {
+        allCarts,
+        totalPrice,
+        formData,
+      });
+      if (res.data) {
+        window.location.replace(res.data.url);
+      }
+    } else {
+      setIsOpen(true);
+      console.log("stripe");
     }
   };
   return (
@@ -91,26 +107,39 @@ const Payments = ({ formData }) => {
             readOnly
             type="radio"
             name="radio-7"
+            onClick={() => setPaymentMethod("SSLCOMMERZ")}
             className="radio radio-info radio-sm"
-            checked
+            defaultChecked
           />
           <span className="text-gray-600">SSLCOMMERZ (Payment) </span>
           <img className="h-8" src={ssl_commerz} alt="" />
         </div>
+        {paymentMethod === "SSLCOMMERZ" && (
+          <div className="mt-1">
+            <img
+              className="w-full"
+              src="https://i.ibb.co/4JzBpNv/image.png"
+              alt="SSLCOMMERZ"
+            />
+          </div>
+        )}
         <div className="flex items-center gap-3">
           <input
             readOnly
             type="radio"
             name="radio-7"
+            onClick={() => setPaymentMethod("STRIPE")}
             className="radio radio-info radio-sm"
           />
           <span className="text-gray-600">VISA or MASTERCARD </span>
           <img className="h-8" src={cardVisa} alt="card-visa-image" />
         </div>
+
         <div className="flex items-start mt-5">
           <input
+            onChange={() => setAcceptTerms(!acceptTerms)}
             type="checkbox"
-            className="checkbox checkbox-info checkbox-xs rounded-[3px] "
+            className="checkbox checkbox-info checkbox-xs rounded-[3px] !accent-pink-500"
             required
           />
           <span className="text-gray-600 ml-2 text-sm">
@@ -118,15 +147,30 @@ const Payments = ({ formData }) => {
             privacy policy, returns & refunds.
           </span>
         </div>
+        {!acceptTerms && (
+          <p className="text-red-500">
+            {" "}
+            ⬆️ Accept Terms and condition for Payment
+          </p>
+        )}
       </div>
       <div className="mt-8 text-right">
         <button
+          disabled={!acceptTerms}
           onClick={() => handlePayment(allCarts, totalPrice)}
           className="button-primary !bg-red-500 hover:!bg-red-600 duration-200"
         >
-          Pay Now
+          Pay Now{" "}
+          {paymentMethod === "SSLCOMMERZ" ? "with SSLCOMMERZ" : "with STRIPE"}
         </button>
       </div>
+      <StripePaymentModal
+        isOpen={isOpen}
+        closeModal={closeModal}
+        totalPrice={totalPrice}
+        formData={formData}
+        allCarts={allCarts}
+      />
     </div>
   );
 };

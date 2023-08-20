@@ -62,8 +62,11 @@ const CartModal = ({
                     {allCarts &&
                       allCarts.length > 0 &&
                       allCarts.map((item) => (
-                        <div key={item._id} className="group transition-all border rounded p-2 shadow-md hover:shadow-xl duration-500">
-                          <div className="flex items-end gap-5">
+                        <div
+                          key={item._id}
+                          className="group transition-all border rounded p-2 shadow-md hover:shadow-lg duration-300"
+                        >
+                          <div className="flex items-center gap-5 ">
                             {/* set loading for a specific item only */}
                             <div className="relative flex justify-center items-center">
                               <div className="absolute">
@@ -72,7 +75,7 @@ const CartModal = ({
                                 )}
                               </div>
                               <img
-                                className={`w-14 duration-500 ${
+                                className={`w-14 duration-500 object-contain ${
                                   loadingItemId === item._id ? "opacity-40" : ""
                                 }`}
                                 src={item.image}
@@ -113,7 +116,7 @@ const CartModal = ({
                               whileHover={{ x: "0", opacity: 1 }}
                               transition={{ duration: 1 }}
                               onClick={() => handleDelete(item._id)}
-                              className="cursor-pointer text-opacity-0 group-hover:text-opacity-100 text-red-500 text-3xl font-medium   duration-1000 "
+                              className="cursor-pointer text-opacity-0 group-hover:text-opacity-100 text-red-500 text-3xl font-medium   duration-700 "
                             >
                               x
                             </motion.button>
@@ -123,8 +126,12 @@ const CartModal = ({
                   </div>
 
                   <div className="flex justify-between mt-10">
-                    <p className="text-lg text-gray-700 font-medium">SubTotal</p>
-                    <p className="text-xl font-semibold text-gray-700">${total.toFixed(2)}</p>
+                    <p className="text-lg text-gray-700 font-medium">
+                      SubTotal
+                    </p>
+                    <p className="text-xl font-semibold text-gray-700">
+                      ${total.toFixed(2)}
+                    </p>
                   </div>
 
                   <div className="mt-4 text-center flex flex-col gap-3">

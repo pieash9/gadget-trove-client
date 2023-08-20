@@ -11,7 +11,16 @@ const Navbar = () => {
   const { user, logout } = useAuth();
   const { allCarts, refetch } = useCartItems();
   const [isOpen, setIsOpen] = useState(false);
+
   const [axiosSecure] = useAxiosSecure();
+
+
+  // all cart items count
+  const cartItemsCount = allCarts.reduce(
+    (total, item) => total + 1 * item.quantity,
+    0
+  );
+  
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [loadingItemId, setLoadingItemId] = useState(null);
@@ -101,9 +110,8 @@ const Navbar = () => {
 
       <div className="px-3 relative">
         <div className="badge badge-info badge-sm text-xs absolute -mt-2 -right-2 ">
-          {/* cart length  */}
-
-          {allCarts?.length}
+          {/* All cart items count */}
+          {cartItemsCount}
         </div>
         <FaShoppingCart
           onClick={() => setIsOpen(true)}

@@ -39,6 +39,7 @@ const Checkout = () => {
               setFormData={setFormData}
             />
           )}
+          {/* Todo make it true */}
           {formCompleted && <Payments formData={formData} />}
         </div>
       </div>
